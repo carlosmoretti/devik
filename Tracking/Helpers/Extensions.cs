@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Correios.Helpers
+namespace Model.Helpers
 {
     public static class Extensions
     {
