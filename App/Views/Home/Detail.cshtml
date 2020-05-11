@@ -1,0 +1,49 @@
+﻿@model App.CQRS.Response.BuscarPacoteResponse
+
+<div class="card">
+    <div class="card-header">Retorno da Pesquisa!</div>
+    <div class="card-body">
+        <div class="row">
+            @if (Model.Response.Postagem != null)
+            {
+                <div class="col-sm-4">
+                    <h4>Postagem:</h4>
+                    <p>@Model.Response.Postagem.Value.ToString("dd/MM/yyyy")</p>
+                </div>
+            }
+
+            @if (Model.Response.UltimaMovimentacao != null)
+            {
+                <div class="col-sm-4">
+                    <h4>Última Movimentação:</h4>
+                    <p>@Model.Response.UltimaMovimentacao.Value.ToString("dd/MM/yyyy")</p>
+                </div>
+            }
+
+
+            @if (Model.Response.Previsao != null)
+            {
+                <div class="col-sm-4">
+                    <h4>Previsão de Entrega:</h4>
+                    <p>@Model.Response.Previsao.Value.ToString("dd/MM/yyyy")</p>
+                </div>
+            }
+        </div>
+        <hr/>
+        <table class="table table-striped table-sm table-bordered">
+            <tr>
+                <th>Data</th>
+                <th>Título</th>
+                <th>Movimentação</th>
+            </tr>
+            @foreach(var item in Model.Response.Movimentacoes)
+            {
+                <tr>
+                    <td>@item.Data</td>
+                    <td>@item.Titulo.ToUpper()</td>
+                    <td>@item.Descricao.ToUpper()</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -7,6 +7,6 @@ namespace Service.Interface
 {
     public interface ITrackingService
     {
-        Produto GetTracking(string codigo);
+        public Produto GetTracking(string codigo);
     }
 }

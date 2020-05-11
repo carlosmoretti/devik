@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Busque o seu pacote!</h1>
+    <p class="lead">Busque o seu pacote dos correios mais facilmente.</p>
+    <hr class="my-4">
+    <p class="lead">
+        @Html.ActionLink("Buscar Pacote", "Buscar", "Home", null, new { @class= "btn btn-primary btn-lg" })
+    </p>
+</div>

@@ -1,0 +1,13 @@
+﻿@model App.CQRS.Request.BuscarPacoteRequest
+
+<div class="card">
+    <div class="card-header">Buscar</div>
+    <div class="card-body">
+        @using(Html.BeginForm("Detail", "Home", FormMethod.Post))
+        {
+            @Html.LabelFor(d=>d.NumeroPacote, null)
+            @Html.TextBoxFor(d => d.NumeroPacote, null, new { @class = "form-control form-control-sm bordered-0" })
+            <input type="submit" class="btn btn-sm btn-info mt-2" />
+        }
+    </div>
+</div>
