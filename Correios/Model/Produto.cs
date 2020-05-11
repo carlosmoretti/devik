@@ -11,9 +11,9 @@ namespace Correios.Model
         {
             this.Movimentacoes = new List<Movimentacao>();
         }
-        public DateTime Postagem { get; set; }
-        public DateTime UltimaMovimentacao { get; set; }
-        public DateTime Previsao { get; set; }
+        public DateTime? Postagem { get; set; }
+        public DateTime? UltimaMovimentacao { get; set; }
+        public DateTime? Previsao { get; set; }
         public List<Movimentacao> Movimentacoes { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using RestSharp;
 using HtmlAgilityPack;
 using Correios.Model;
 using RestSharp.Serialization;
+using Correios.Helpers;
 
 namespace Correios.Controllers
 {
@@ -34,9 +35,14 @@ namespace Correios.Controllers
 
             Produto prd = new Produto();
 
-            prd.Previsao = Convert.ToDateTime(doc.GetElementbyId("DataEntrega").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
-            prd.UltimaMovimentacao = Convert.ToDateTime(doc.GetElementbyId("UltimoEvento").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
-            prd.Postagem = Convert.ToDateTime(doc.GetElementbyId("EventoPostagem").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
+            if(!doc.GetElementbyId("DataEntrega").InnerText.IsEmpty())
+                prd.Previsao = Convert.ToDateTime(doc.GetElementbyId("DataEntrega").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
+
+            if(!doc.GetElementbyId("UltimoEvento").InnerText.IsEmpty())
+                prd.UltimaMovimentacao = Convert.ToDateTime(doc.GetElementbyId("UltimoEvento").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
+
+            if (!doc.GetElementbyId("EventoPostagem").InnerText.IsEmpty())
+                prd.Postagem = Convert.ToDateTime(doc.GetElementbyId("EventoPostagem").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
 
             var tabelas = doc.DocumentNode.Descendants().Where(d=>d.HasClass("listEvent") && d.HasClass("sro"));
             foreach(var item in tabelas)
