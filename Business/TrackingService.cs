@@ -52,6 +52,7 @@ namespace Service
             doc.LoadHtml(retorno);
 
             Produto prd = new Produto();
+            prd.Location = "RIO DE JANEIRO";
 
             if (!doc.GetElementbyId("DataEntrega").InnerText.IsEmpty())
                 prd.Previsao = Convert.ToDateTime(doc.GetElementbyId("DataEntrega").Descendants().ToList()[4].InnerText.Replace("\r\n", "").Replace("\t", ""));
