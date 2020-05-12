@@ -20,13 +20,13 @@ Com o [HTML Agility Pack](https://html-agility-pack.net/) eu consegui manipular 
   "movimentacoes": [
     {
       "data": "2020-05-07T05:07:00",
-      "descricao": "de Unidade de Tratamento em RIO DE JANEIRO / RJ  para Unidade de Distribui��o  em RIO DE JANEIRO / RJ",
-      "titulo": "Objeto encaminhado"
+      "descricao": "de Unidade de Tratamento em RIO DE JANEIRO / RJ  para Unidade de distribuição  em RIO DE JANEIRO / RJ ",
+      "titulo": "Objeto encaminhado "
     },
     {
       "data": "2020-05-06T14:34:00",
-      "descricao": "",
-      "titulo": "Objeto postado"
+      "descricao": " ",
+      "titulo": "Objeto postado "
     }
   ]
 }
