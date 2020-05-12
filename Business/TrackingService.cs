@@ -36,14 +36,20 @@ namespace Service
             opt.Encoding = Encoding.UTF8;
 
             req.Method = Method.POST;
-            req.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            req.AddHeader("Accept", "application/json");
+            //req.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+            req.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            opt.Encoding = Encoding.GetEncoding("ISO-8859-1");
+            req.AddParameter("Accept", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+            req.AddParameter("Accept-Encoding", "gzip, deflate, br");
+            req.AddParameter("Location", "../resultado.cfm");
+            req.AddParameter("Content-Language", "pt-BR");
             req.AddParameter("acao", "track");
             req.AddParameter("objetos", codigo);
             req.AddParameter("btnPesq", "Buscar");
 
             HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(opt.Execute(req).Content);
+            var retorno = opt.Execute(req).Content;
+            doc.LoadHtml(retorno);
 
             Produto prd = new Produto();
 
@@ -64,8 +70,8 @@ namespace Service
                 var datas = fullobj.ChildNodes[1].InnerText.Split("\r\n");
 
                 mov.Data = Convert.ToDateTime($"{datas[0]} {datas[1]}");
-                mov.Titulo = fullobj.ChildNodes[3].ChildNodes[1].InnerText;
-                mov.Descricao = fullobj.ChildNodes[3].ChildNodes[4].InnerText.Replace("\r", "").Replace("\n", "").Replace("\t", " ").Replace("  ", " ").Substring(1);
+                mov.Titulo = fullobj.ChildNodes[3].ChildNodes[1].InnerText.ParseBOMChars();
+                mov.Descricao = fullobj.ChildNodes[3].ChildNodes[4].InnerText.Replace("\r", "").Replace("\n", "").Replace("\t", " ").Replace("  ", " ").Substring(1).ParseBOMChars();
 
                 prd.Movimentacoes.Add(mov);
             }

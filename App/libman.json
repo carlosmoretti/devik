@@ -6,6 +6,10 @@
       "provider": "jsdelivr",
       "library": "bootstrap@4.4.1",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/jquery/"
     }
   ]
 }

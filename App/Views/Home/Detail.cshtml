@@ -1,4 +1,11 @@
 ﻿@model App.CQRS.Response.BuscarPacoteResponse
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">@Html.ActionLink("Início", "Index", "Home")</li>
+        <li class="breadcrumb-item">@Html.ActionLink("Buscar Pacote", "Buscar", "Home")</li>
+        <li class="breadcrumb-item active" aria-current="page">Detalhamento</li>
+    </ol>
+</nav>
 
 <div class="card">
     <div class="card-header">Retorno da Pesquisa!</div>
@@ -6,25 +13,24 @@
         <div class="row">
             @if (Model.Response.Postagem != null)
             {
-                <div class="col-sm-4">
-                    <h4>Postagem:</h4>
+                <div class="col-sm-4 text-center text-center">
+                    <h4>📲 Postagem</h4>
                     <p>@Model.Response.Postagem.Value.ToString("dd/MM/yyyy")</p>
                 </div>
             }
 
             @if (Model.Response.UltimaMovimentacao != null)
             {
-                <div class="col-sm-4">
-                    <h4>Última Movimentação:</h4>
+                <div class="col-sm-4 text-center">
+                    <h4>🛫 Última Movimentação:</h4>
                     <p>@Model.Response.UltimaMovimentacao.Value.ToString("dd/MM/yyyy")</p>
                 </div>
             }
 
-
             @if (Model.Response.Previsao != null)
             {
-                <div class="col-sm-4">
-                    <h4>Previsão de Entrega:</h4>
+                <div class="col-sm-4 text-center">
+                    <h4>🛬 Previsão de Entrega:</h4>
                     <p>@Model.Response.Previsao.Value.ToString("dd/MM/yyyy")</p>
                 </div>
             }
