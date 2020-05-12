@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ElmahCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,10 @@ namespace Correios
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddElmah((opt) =>
+            {
+                opt.Path = "elmah";
+            });
 
             services.AddScoped<ITrackingService, TrackingService>();
 
@@ -52,6 +57,7 @@ namespace Correios
 
             app.UseAuthorization();
 
+            app.UseElmah();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
