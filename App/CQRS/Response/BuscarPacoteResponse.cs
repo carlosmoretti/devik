@@ -6,7 +6,7 @@ using Model;
 
 namespace App.CQRS.Response
 {
-    public class BuscarPacoteResponse
+    public class BuscarPacoteResponse : Response
     {
         public Produto Response { get; set; }
     }

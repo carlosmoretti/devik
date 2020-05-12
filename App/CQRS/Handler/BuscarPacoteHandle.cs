@@ -16,6 +16,17 @@ namespace App.CQRS.Handler
     {
         public BuscarPacoteResponse Handle(BuscarPacoteRequest req, ITrackingService _service)
         {
+            var res = new BuscarPacoteResponse();
+            if (String.IsNullOrEmpty(req.NumeroPacote))
+                return new BuscarPacoteResponse()
+                {
+                    Info = new Models.InfoUsuarioViewModel()
+                    {
+                        Color = "danger",
+                        Message = "O código de rastreio não pode ser vazio."
+                    }
+                };
+
             return new BuscarPacoteResponse()
             {
                 Response = _service.GetTracking(req.NumeroPacote)
