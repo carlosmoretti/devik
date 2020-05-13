@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace App.CQRS.Handler.Interface
 {
-    public interface IBuscarPacoteHandle<TReq, TRes> : IHandle<TReq, TRes> 
-        where TRes : class 
-        where TReq : class
+    public interface IBuscarPacoteHandle : IHandle<BuscarPacoteRequest, BuscarPacoteResponse>
     {
         BuscarPacoteResponse Handle(BuscarPacoteRequest req, ITrackingService _service);
     }

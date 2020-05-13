@@ -12,7 +12,7 @@ using App.CQRS.Handler.Interface;
 
 namespace App.CQRS.Handler
 {
-    public class BuscarPacoteHandle : IBuscarPacoteHandle<BuscarPacoteRequest, BuscarPacoteResponse>
+    public class BuscarPacoteHandle : IBuscarPacoteHandle
     {
         public BuscarPacoteResponse Handle(BuscarPacoteRequest req, ITrackingService _service)
         {

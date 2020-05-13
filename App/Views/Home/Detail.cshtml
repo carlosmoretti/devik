@@ -1,44 +1,49 @@
-﻿@model App.CQRS.Response.BuscarPacoteResponse
+﻿@model App.Models.VisualizarPacoteViewModel
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">@Html.ActionLink("Início", "Index", "Home")</li>
         <li class="breadcrumb-item">@Html.ActionLink("Buscar Pacote", "Buscar", "Home")</li>
-        <li class="breadcrumb-item active" aria-current="page">Detalhamento</li>
+        <li class="breadcrumb-item active" aria-current="page">@Model.BuscarPacoteResponse.Response.Codigo</li>
     </ol>
 </nav>
 
-@if (Model.Info != null)
+@if (Model.BuscarPacoteResponse.Info != null)
 {
-    <div class="alert alert-@Model.Info.Color">@Model.Info.Message</div>
+    <div class="alert alert-@Model.BuscarPacoteResponse.Info.Color">@Model.BuscarPacoteResponse.Info.Message</div>
 }
 
-@if (Model.Response != null)
+@if (Model.AdicionarEmailResponse.Info != null)
+{
+    <div class="alert alert-@Model.AdicionarEmailResponse.Info.Color">@Model.AdicionarEmailResponse.Info.Message</div>
+}
+
+@if (Model.BuscarPacoteResponse.Response != null)
 {
     <div class="card">
         <div class="card-header">Retorno da Pesquisa!</div>
         <div class="card-body">
             <div class="row">
-                @if (Model.Response.Postagem != null)
+                @if (Model.BuscarPacoteResponse.Response.Postagem != null)
                 {
                     <div class="col-sm-4 text-center text-center">
                         <h4>📲 Postagem</h4>
-                        <p>@Model.Response.Postagem.Value.ToString("dd/MM/yyyy")</p>
+                        <p>@Model.BuscarPacoteResponse.Response.Postagem.Value.ToString("dd/MM/yyyy")</p>
                     </div>
                 }
 
-                @if (Model.Response.UltimaMovimentacao != null)
+                @if (Model.BuscarPacoteResponse.Response.UltimaMovimentacao != null)
                 {
                     <div class="col-sm-4 text-center">
                         <h4>🛫 Última Movimentação:</h4>
-                        <p>@Model.Response.UltimaMovimentacao.Value.ToString("dd/MM/yyyy")</p>
+                        <p>@Model.BuscarPacoteResponse.Response.UltimaMovimentacao.Value.ToString("dd/MM/yyyy")</p>
                     </div>
                 }
 
-                @if (Model.Response.Previsao != null)
+                @if (Model.BuscarPacoteResponse.Response.Previsao != null)
                 {
                     <div class="col-sm-4 text-center">
                         <h4>🛬 Previsão de Entrega:</h4>
-                        <p>@Model.Response.Previsao.Value.ToString("dd/MM/yyyy")</p>
+                        <p>@Model.BuscarPacoteResponse.Response.Previsao.Value.ToString("dd/MM/yyyy")</p>
                     </div>
                 }
             </div>
@@ -49,7 +54,7 @@
                     <th>Título</th>
                     <th>Movimentação</th>
                 </tr>
-                @foreach (var item in Model.Response.Movimentacoes)
+                @foreach (var item in Model.BuscarPacoteResponse.Response.Movimentacoes)
                 {
                     <tr>
                         <td>@item.Data</td>
@@ -58,6 +63,14 @@
                     </tr>
                 }
             </table>
+            <h3>Receba Informações deste pacote.</h3>
+            <small>Receba de hora em hora informações deste pacote no seu e-mail!</small>
+            @using (Html.BeginForm("CadastrarEmail", "Home", FormMethod.Post))
+            {
+                @Html.HiddenFor(d => d.AdicionarEmailRequest.CodigoPacote)
+                @Html.TextBoxFor(d => d.AdicionarEmailRequest.Email, null, new { @class = "form-control form-control-sm" })
+                <input type="submit" value="Adicionar E-mail" class="btn btn-sm btn-success mt-2" />
+            }
         </div>
     </div>
 }

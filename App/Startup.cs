@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Contexto;
 using App.CQRS.Handler;
 using App.CQRS.Handler.Interface;
 using ElmahCore.Mvc;
@@ -12,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service;
 using Service.Interface;
+using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace App
 {
@@ -28,7 +31,11 @@ namespace App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<DatabaseContext>((d) => 
+                d.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddScoped<BuscarPacoteHandle>();
+            services.AddScoped<AdicionarEmailHandle>();
             services.AddScoped<ITrackingService, TrackingService>();
 
             services.AddElmah((opt) =>
