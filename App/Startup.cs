@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.CQRS.Handler;
 using App.CQRS.Handler.Interface;
+using ElmahCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,11 @@ namespace App
             services.AddControllersWithViews();
             services.AddScoped<BuscarPacoteHandle>();
             services.AddScoped<ITrackingService, TrackingService>();
+
+            services.AddElmah((opt) =>
+            {
+                opt.Path = "elmah";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +60,8 @@ namespace App
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseElmah();
         }
     }
 }

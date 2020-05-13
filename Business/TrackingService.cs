@@ -15,34 +15,9 @@ namespace Service
         public Produto GetTracking(string codigo)
         {
             var req = new RestRequest();
-
-            req.OnBeforeDeserialization = resp => {
-                if (resp.RawBytes.Length >= 3 && resp.RawBytes[0] == 0xEF && resp.RawBytes[1] == 0xBB && resp.RawBytes[2] == 0xBF)
-                {
-                    // Copy the data but with the UTF-8 BOM removed.
-                    var newData = new byte[resp.RawBytes.Length - 3];
-                    Buffer.BlockCopy(resp.RawBytes, 3, newData, 0, newData.Length);
-                    resp.RawBytes = newData;
-
-                    // Force re-conversion to string on next access
-                    resp.Content = null;
-                }
-            };
-
-
-
             var opt = new RestClient("https://www2.correios.com.br/sistemas/rastreamento/ctrl/ctrlRastreamento.cfm?");
-
-            opt.Encoding = Encoding.UTF8;
-
             req.Method = Method.POST;
-            //req.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
             req.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            opt.Encoding = Encoding.GetEncoding("ISO-8859-1");
-            req.AddParameter("Accept", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
-            req.AddParameter("Accept-Encoding", "gzip, deflate, br");
-            req.AddParameter("Location", "../resultado.cfm");
-            req.AddParameter("Content-Language", "pt-BR");
             req.AddParameter("acao", "track");
             req.AddParameter("objetos", codigo);
             req.AddParameter("btnPesq", "Buscar");
