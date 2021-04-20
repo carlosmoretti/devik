@@ -26,9 +26,9 @@ namespace Correios.Controllers
         }
 
         [HttpGet("Track/{codigo}")]
-        public object Track(string codigo)
+        public async Task<object> Track(string codigo)
         {
-            return _trackingService.GetTracking(codigo);
+            return await _trackingService.GetTracking(codigo);
         }
 
         [HttpGet]
